@@ -11141,5 +11141,20 @@ export const languagesData = [
 ];
 
 export const servicesData = [
-
-]
+	{
+		id: 'C',
+		name: 'trainboard-app-form-services-options-cercanias'
+	},
+	{
+		id: 'R',
+		name: 'trainboard-app-form-services-options-regional'
+	},
+	{
+		id: 'L',
+		name: 'trainboard-app-form-services-options-long-distance'
+	},
+	{
+		id: 'A',
+		name: 'trainboard-app-form-services-options-high-speed'
+	}
+];
