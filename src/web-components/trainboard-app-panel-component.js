@@ -11,19 +11,11 @@ export class TrainboardAppPanelComponent extends LitElement {
   static get properties() {
     return {
       /**
-      * Main url of iframe
-      * @type {string}
-      * @default 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos'
-      */
-      iframeUrl: { 
-        type: String 
-      },
-      /**
       * Custom url with params
       * @type {string}
       * @default ''
       */
-      iframeCustomUrl: { 
+      customUrl: { 
         type: String 
       },
     };
@@ -37,8 +29,7 @@ export class TrainboardAppPanelComponent extends LitElement {
 
   constructor() {
     super();
-    this.iframefUrl = '';
-    this.iframeCustomUrl = '';
+    this.customUrl = '';
   }
 
   /**
@@ -50,7 +41,7 @@ export class TrainboardAppPanelComponent extends LitElement {
       <div class="container mx-auto bg-white lg:p-8 md:p-8 p-4 rounded-lg">
         ${this._screenHeaderTemplate}
         <iframe 
-          src="https://info.adif.es/?s=17000&a=a%26rutaRecursos%3D..%2F..%2F..%2Frecursos%26IdEstacion%3D17000%26languages%3DESP%26interfaz%3Dadif-gravita-departures%26traffic%3DC%26subtitle%3DCERC%26countdown%3Dtrue%26show-access%3Dfalse%26show-platform%3Dtrue%26show-product%3Dfalse%26show-number%3Dfalse%26show-platform-preview%3Dtrue%26show-header%3Dtrue%26font-size%3D1%23" 
+          src="${this.customUrl}" 
           class="w-full rounded-lg duration-300"></iframe>
       </div>
     `

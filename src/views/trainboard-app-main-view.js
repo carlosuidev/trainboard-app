@@ -19,16 +19,16 @@ export class TrainboardAppMainView extends LitElement {
       * @type {string}
       * @default 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos'
       */
-      iframeUrl: { 
+      _iframeUrl: { 
         type: String 
       },
       /**
-      * Custom url with params
-      * @type {string}
+      * Custom url for iframe
+      * @type {Object}
       * @default ''
       */
       iframeCustomUrl: { 
-        type: String 
+        type: Object
       },
       /**
       * List of stations with id
@@ -77,12 +77,16 @@ export class TrainboardAppMainView extends LitElement {
 
   constructor() {
     super();
-    this.iframeUrl = 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos';
-    this.iframeCustomUrl = '';
+    this._iframeUrl = 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos';
+    this.iframeCustomUrl = {
+      home: this._iframeUrl,
+      preview: this._iframeUrl
+    };
     this.screenParams = {
-      iframeCustomUrl: null,
-      station: null,
+      station: '',
+      screen: '',
       language: '',
+      services: [],
     };
     this.toggles = {
       form: false
@@ -100,8 +104,17 @@ export class TrainboardAppMainView extends LitElement {
   get trainboardManagerTemplate() {
     return html`
       <trainboard-app-manager-component
+        .screenParams="${this.screenParams}"
+        .previewParams="${this.previewParams}"
+        @trainbboard-app-manager-component-url-home=${(e) => this._updateUrl('home', e.detail.url)}
+        @trainbboard-app-manager-component-url-preview=${(e) => this._updateUrl('preview', e.detail.url)}
       ></trainboard-app-manager-component>`;
   }
+
+  _updateUrl(mode, url) {
+    this.iframeCustomUrl = url;
+  }
+
 
   /**
   * Screen template
@@ -110,8 +123,8 @@ export class TrainboardAppMainView extends LitElement {
   get _iframePanelTemplate() {
     return html`
       <trainboard-app-panel-component
-        .iframeUrl="${this.iframeUrl}"
-        .iframeCustomUrl="${this.iframeCustomUrl}"
+        .customUrl="${this.iframeCustomUrl.home}"
+        .screenParams="${this.screenParams}"
         @trainboard-app-panel-component-open-modal=${this._openModal}
       ></trainboard-app-panel-component>`
   }
@@ -123,6 +136,7 @@ export class TrainboardAppMainView extends LitElement {
   get _iframeFormTemplate(){
     return html`
       <trainboard-app-form-component
+        .customUrl="${this.iframeCustomUrl.preview}"
         .stationsData="${this.stationsData}"
         .languagesData="${this.languagesData}"
         .servicesData="${this.servicesData}"
@@ -137,12 +151,12 @@ export class TrainboardAppMainView extends LitElement {
    * @param {*} e Form data
    */
   _handleFormSubmit(e) {
-    const formData = e.detail.formData;
+    const formData = e?.detail?.formData;
     this.toggles = {
       ...this.toggles,
       form: false
     };
-    console.log('Form submitted with data:', formData);
+    this.screenParams = formData;
   }
 
   /**
