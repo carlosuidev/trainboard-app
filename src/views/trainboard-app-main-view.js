@@ -4,7 +4,7 @@ import { languagesData, stationsData, servicesData } from '../data/constants.js'
 import { setLang, t } from '../../locales/locales.js';
 import { TrainboardAppPanelComponent } from '../web-components/trainboard-app-panel-component.js';
 import { TrainboardAppFormComponent } from '../web-components/trainboard-app-form-component.js';
-
+import { TrainboardAppManagerComponent } from '../web-components/trainboard-app-manager-component.js';
 
 export class TrainboardAppMainView extends LitElement {
 
@@ -91,6 +91,16 @@ export class TrainboardAppMainView extends LitElement {
     this.stationsData = stationsData || [];
     this.languagesData = languagesData || [];
     this.servicesData = servicesData || [];
+  }
+
+  /**
+  * Template for the trainboard manager component 
+  * @return {TemplateResult}
+  */
+  get trainboardManagerTemplate() {
+    return html`
+      <trainboard-app-manager-component
+      ></trainboard-app-manager-component>`;
   }
 
   /**
@@ -194,7 +204,6 @@ export class TrainboardAppMainView extends LitElement {
 
   /**
   * Set true modal to open form
-  * @param {String}
   */
   _openModal(){
     this.toggles = {
@@ -236,6 +245,7 @@ export class TrainboardAppMainView extends LitElement {
   */
   get _mainStructureTemplate() {
     return html`
+      ${this.trainboardManagerTemplate}
       <div class="bg-slate-100 min-h-screen text-slate-900">
         ${this._headerTemplate}
         ${this._bodyTemplate}
