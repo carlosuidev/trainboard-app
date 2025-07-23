@@ -1,6 +1,6 @@
 import { LitElement, css, html, nothing } from 'lit'
 import { TWStyles } from '../../tw.js'
-import { languagesData, stationsData } from '../data/constants.js';
+import { languagesData, stationsData, servicesData } from '../data/constants.js';
 import { setLang, t } from '../../locales/locales.js';
 import { TrainboardAppPanelComponent } from '../web-components/trainboard-app-panel-component.js';
 import { TrainboardAppFormComponent } from '../web-components/trainboard-app-form-component.js';
@@ -35,7 +35,7 @@ export class TrainboardAppMainView extends LitElement {
       * @type {Array}
       * @default []
       */
-      stationsList: {
+      stationsData: {
         type: Array
       },
       /**
@@ -43,7 +43,7 @@ export class TrainboardAppMainView extends LitElement {
       * @type {Array}
       * @default []
       */
-      languageList: {
+      languagesData: {
         type: Array
       },
       /**
@@ -79,8 +79,6 @@ export class TrainboardAppMainView extends LitElement {
     super();
     this.iframeUrl = 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos';
     this.iframeCustomUrl = '';
-    this.stationsList = [] || stationsData;
-    this.languageList = [] || languagesData;
     this.screenParams = {
       iframeCustomUrl: null,
       station: null,
@@ -90,6 +88,9 @@ export class TrainboardAppMainView extends LitElement {
       form: false
     };
     this.language = 'es';
+    this.stationsData = stationsData || [];
+    this.languagesData = languagesData || [];
+    this.servicesData = servicesData || [];
   }
 
   /**
@@ -112,9 +113,26 @@ export class TrainboardAppMainView extends LitElement {
   get _iframeFormTemplate(){
     return html`
       <trainboard-app-form-component
+        .stationsData="${this.stationsData}"
+        .languagesData="${this.languagesData}"
+        .servicesData="${this.servicesData}"
         @trainboard-app-form-component-close-modal=${this._closeModal}
+        @trainboard-app-form-component-submit=${this._handleFormSubmit}
       ></trainboard-app-form-component>
     `
+  }
+
+  /**
+   * Handle form submit event
+   * @param {*} e Form data
+   */
+  _handleFormSubmit(e) {
+    const formData = e.detail.formData;
+    this.toggles = {
+      ...this.toggles,
+      form: false
+    };
+    console.log('Form submitted with data:', formData);
   }
 
   /**
@@ -159,7 +177,9 @@ export class TrainboardAppMainView extends LitElement {
   get _disclaimerTemplate(){
     return html`
       <div class="bg-yellow-100 text-yellow-600 rounded-lg w-full px-6 py-3 mb-4">
-        <p class="text-sm text-center text-balance"><span class="font-bold">${t("trainboard-app-main-disclaimer-label")}</span>${t("trainboard-app-main-disclaimer-text")}</p>
+        <p class="text-sm text-center text-balance">
+          <span class="font-bold">${t("trainboard-app-main-disclaimer-label")}</span>${t("trainboard-app-main-disclaimer-text")}
+        </p>
       </div>`
   }
 
@@ -174,7 +194,7 @@ export class TrainboardAppMainView extends LitElement {
 
   /**
   * Set true modal to open form
-  * @param {String} lang 
+  * @param {String}
   */
   _openModal(){
     this.toggles = {
@@ -219,7 +239,9 @@ export class TrainboardAppMainView extends LitElement {
       <div class="bg-slate-100 min-h-screen text-slate-900">
         ${this._headerTemplate}
         ${this._bodyTemplate}
-        ${this.toggles?.form === true ? this._iframeFormTemplate : nothing}
+        ${this.toggles?.form === true 
+          ? this._iframeFormTemplate 
+          : nothing}
       </div>`
   }
 
