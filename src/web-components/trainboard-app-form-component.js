@@ -101,10 +101,10 @@ export class TrainboardAppFormComponent extends LitElement {
    */
   _checkRequiredFields() {
     const newStatus = {
-      station: !this._formData.station,
-      screen: !this._formData.screen,
-      services: this._formData.services.length === 0,
-      language: !this._formData.language,
+      station: !this._formData?.station,
+      screen: !this._formData?.screen,
+      services: this._formData?.services?.length === 0,
+      language: !this._formData?.language,
     };
 
     this._requiredFieldStatus = newStatus;
@@ -286,8 +286,8 @@ export class TrainboardAppFormComponent extends LitElement {
         <select id="language"
           placeholder="${t("trainboard-app-form-placeholder-language")}"
           name="language"
-          .value="${this._formData.language[0] || ''}"
-          @change="${e => this._updateForm('language', [e.target.value])}"
+          .value="${this._formData.language || ''}"
+          @change="${e => this._updateForm('language', e.target.value)}"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5">
           <option value="" disabled>${t("trainboard-app-form-placeholder-language")}</option>
           ${this.languagesData.map(lang => html`
