@@ -77,10 +77,10 @@ export class TrainboardAppMainView extends LitElement {
 
   constructor() {
     super();
-    this._iframeUrl = 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos';
+    this._iframeUrl = 'https://info.adif.es/?s=17000&a=a%26rutaRecursos%3D..%2F..%2F..%2Frecursos%26IdEstacion%3D17000%26languages%3DESP%26interfaz%3Dadif-gravita-departures%26traffic%3DL%2CR%2CC%2CA%26countdown%3Dtrue%26show-access%3Dtrue%26show-platform%3Dtrue%26show-product%3Dtrue%26show-number%3Dtrue%26show-platform-preview%3Dtrue%26show-header%3Dfalse%26font-size%3D1%23';
     this.iframeCustomUrl = {
-      home: this._iframeUrl,
-      preview: this._iframeUrl
+      'home': this._iframeUrl,
+      'preview': this._iframeUrl
     };
     this.screenParams = {
       station: '',
@@ -106,16 +106,17 @@ export class TrainboardAppMainView extends LitElement {
       <trainboard-app-manager-component
         .screenParams="${this.screenParams}"
         .previewParams="${this.previewParams}"
-        @trainbboard-app-manager-component-url-home=${(e) => this._updateUrl('home', e.detail.url)}
-        @trainbboard-app-manager-component-url-preview=${(e) => this._updateUrl('preview', e.detail.url)}
+        @trainboard-app-manager-component-url-home=${(e) => this._updateUrl('home', e.detail)}
+        @trainboard-app-manager-component-url-preview=${(e) => this._updateUrl('preview', e.detail)}
       ></trainboard-app-manager-component>`;
   }
 
   _updateUrl(mode, url) {
-    this.iframeCustomUrl = url;
+    this.iframeCustomUrl = {
+      ...this.iframeCustomUrl,
+      [mode]: url
+    }
   }
-
-
   /**
   * Screen template
   * @return {TemplateResult}

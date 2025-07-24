@@ -1,6 +1,8 @@
 import { LitElement, css, html } from 'lit'
 import { TWStyles } from '../../tw.js';
 import { t } from '../../locales/locales.js';
+import { stationsData } from '../data/constants.js';
+
 
 export class TrainboardAppPanelComponent extends LitElement {
 
@@ -18,25 +20,48 @@ export class TrainboardAppPanelComponent extends LitElement {
       customUrl: { 
         type: String 
       },
+      /**
+      * All the user params for search
+      * @type {Object}
+      * @default {}
+      */
+      screenParams: {
+        type: Object
+      }
     };
   }
 
   static styles = [css`
     iframe {
-      height: 620px;
+      height: 936px;
     }
     `, TWStyles];
 
   constructor() {
     super();
     this.customUrl = '';
+    this.screenParams = {
+      station: '',
+      screen: '',
+      language: '',
+      services: [],
+    };
+  }
+
+  /**
+   * Returns station name
+   * @param {Number} id 
+   * @returns {String}
+   */
+  _parseStationCode(id){
+    return stationsData.find(station => station.code === id)?.description;
   }
 
   /**
   * Scren with iframe template
   * @return {TemplateResult}
   */
-  get _screenIframeTemplate() { 
+  get _screenIframeTemplate() {
     return html`
       <div class="container mx-auto bg-white lg:p-8 md:p-8 p-4 rounded-lg">
         ${this._screenHeaderTemplate}
@@ -52,13 +77,13 @@ export class TrainboardAppPanelComponent extends LitElement {
   * @return {TemplateResult}
   */
   get _screenHeaderTemplate(){
+    const stationName = this._parseStationCode(this.screenParams?.station) || '-';
     return html`
       <div class="mb-8 flex justify-between items-center grid grid-cols-3 gap-4">
-        <div>
-          <p class="font-bold">Estación</p>
-          <p>Chamartin</p>
+        <div class="text-sm">
+          <p class="font-bold">${t("trainboard-app-panel-label-station")}</p>
+          <p>${stationName}</p>
         </div>
-        <button>a</button>
         <button
           @click="${this._fireOpenModal}"
           class="flex justify-center gap-1 items-center font-semibold bg-emerald-400 text-center text-white rounded-lg px-6 py-3 cursor-pointer hover:bg-emerald-500 duration-300 text-sm">

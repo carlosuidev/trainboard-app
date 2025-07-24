@@ -68,7 +68,7 @@ export class TrainboardAppManagerComponent extends LitElement {
     }
     const servicesList = this._getServices(services);
     
-    const url = `https://info.adif.es/?s=${station}a=a%26rutaRecursos%3D..%2F..%2F..%2Frecursos%26IdEstacion%3D${station}%26languages%3D${language}%26interfaz%3Dadif-gravita-${screen}%26traffic%${servicesList}%26countdown%3Dtrue%26show-access%3Dfalse%26show-platform%3Dtrue%26show-product%3Dtrue%26show-number%3Dtrue%26show-platform-preview%3Dtrue%26show-header%3Dtrue%26font-size%3D1%23`;
+    const url = `https://info.adif.es/?s=${station}&a=a%26rutaRecursos%3D..%2F..%2F..%2Frecursos%26IdEstacion%3D${station}%26languages%3D${language}%26interfaz%3Dadif-gravita-${screen}%26traffic%${servicesList}%26countdown%3Dtrue%26show-access%3Dtrue%26show-platform%3Dtrue%26show-product%3Dtrue%26show-number%3Dtrue%26show-platform-preview%3Dtrue%26show-header%3Dfalse%26font-size%3D1%23`;
     this._dispatchIframeUrlChange(this._screenType, url);
   }
 

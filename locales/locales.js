@@ -33,6 +33,7 @@ const translations = {
     "trainboard-app-form-error-required-message": "Este campo es obligatorio",
     "trainboard-app-form-button-submit": "Guardar configuración",
     "trainboard-app-form-button-reset": "Reiniciar configuración",
+    "trainboard-app-panel-label-station": "Estación",
   },
   en: { 
     "trainboard-app-main-header-title": "Trainboard",
