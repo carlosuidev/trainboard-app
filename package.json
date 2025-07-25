@@ -8,15 +8,22 @@
     "twlit": "twlit --input ./tw.css --output ./tw.js",
     "dev": "concurrently \"npm:tailwind:watch\" \"npm:twlit\" \"vite\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner \"test/**/*.test.js\" --watch"
   },
   "dependencies": {
     "@vaadin/router": "^1.7.5",
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
+    "@open-wc/building-rollup": "^2.0.1",
+    "@open-wc/testing": "next",
+    "@web/test-runner": "^0.20.2",
+    "chai": "^5.2.1",
     "concurrently": "^8.2.2",
     "lit": "^3.1.2",
+    "mocha": "^11.7.1",
     "twlit": "^0.0.1-alpha.37",
     "vite": "^5.1.0"
   }
