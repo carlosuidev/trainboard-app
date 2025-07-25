@@ -288,6 +288,21 @@ export class TrainboardAppMainView extends LitElement {
   }
 
   /**
+  * Footer templates
+  * @return {TemplateResult}
+  */
+  get _footerTemplate(){
+    return html`
+      <footer class="px-2 py-8 flex justify-center items-center">
+        <div class="footer text-sm text-slate-400 text-center">
+          <p>${t("trainboard-app-main-footer-text")}<p>
+          <a href="https://github.com/carlosuidev/trainboard-app" class="font-semibold underline">${t("trainboard-app-main-footer-link")}</a>
+        </div>
+      </footer>
+    `
+  }
+
+  /**
   * Main structure template
   * @return {TemplateResult}
   */
@@ -300,6 +315,7 @@ export class TrainboardAppMainView extends LitElement {
         ${this.toggles?.form === true 
           ? this._iframeFormTemplate 
           : nothing}
+        ${this._footerTemplate}
       </div>`
   }
 
