@@ -1538,16 +1538,16 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .grid-cols-5 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-cols-9 {
   grid-template-columns: repeat(9, minmax(0, 1fr));
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -2550,6 +2550,11 @@ video {
   background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
 }
 
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
+}
+
 .bg-slate-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
@@ -2606,11 +2611,6 @@ video {
 .bg-yellow-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(161 98 7 / var(--tw-bg-opacity, 1));
-}
-
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
 }
 
 .decoration-slice {
@@ -3677,11 +3677,6 @@ video {
   background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));
 }
 
-.hover\\:bg-slate-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
-}
-
 .hover\\:bg-slate-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(148 163 184 / var(--tw-bg-opacity, 1));
@@ -3730,10 +3725,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\\:col-span-4 {
-    grid-column: span 4 / span 4;
-  }
-
   .md\\:col-span-1 {
     grid-column: span 1 / span 1;
   }
@@ -3742,24 +3733,24 @@ video {
     grid-column: span 3 / span 3;
   }
 
+  .md\\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
   .md\\:flex {
     display: flex;
+  }
+
+  .md\\:hidden {
+    display: none;
   }
 
   .md\\:w-20 {
     width: 5rem;
   }
 
-  .md\\:w-full {
-    width: 100%;
-  }
-
   .md\\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .md\\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\\:grid-cols-3 {
@@ -3786,11 +3777,6 @@ video {
 
   .lg\\:w-20 {
     width: 5rem;
-  }
-
-  .lg\\:w-fit {
-    width: -moz-fit-content;
-    width: fit-content;
   }
 
   .lg\\:grid-cols-2 {

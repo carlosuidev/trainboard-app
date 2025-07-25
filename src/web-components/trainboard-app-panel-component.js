@@ -108,7 +108,7 @@ export class TrainboardAppPanelComponent extends LitElement {
   get _externalLinkTemplate(){
     return html`
     <div class="pt-2 text-xs flex flex-col items-center gap-2">
-      <div class="border rounded-lg bg-slate-100 p-2">
+      <div class="border rounded-lg bg-slate-100 p-2 lg:flex md:hidden hidden">
       ${this._parseCustomUrl(this.customUrl)}
       </div>
       <a
