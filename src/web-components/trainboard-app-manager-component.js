@@ -59,13 +59,13 @@ export class TrainboardAppManagerComponent extends LitElement {
 
   updated(changedProperties) {
     if (changedProperties.has('screenParams')) {
-      this._createIframeUrl();
       this._screenType = 'home';
+      this._createIframeUrl();
     }
 
     if (changedProperties.has('previewParams')) {
-      this._createIframeUrl();
       this._screenType = 'preview';
+      this._createIframeUrl();
     }
   }
 
