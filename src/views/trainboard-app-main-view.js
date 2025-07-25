@@ -211,17 +211,10 @@ export class TrainboardAppMainView extends LitElement {
               <h2 class="text-xs uppercase font-semibold text-slate-900">${t("trainboard-app-main-header-subtitle")}</h2>
             </div>
           </div>
-          <div class="flex gap-2 items-center justify-center">
-            <button 
-              @click="${() => this._setLanguge('es')}"
-              class="${this.language === 'es' ? 'bg-slate-900' : 'bg-slate-200 text-slate-900'} rounded-lg px-3 text-xs uppercase font-semibold py-1.5 hover:bg-slate-400 duration-300">
-                ${t("trainboard-app-main-language-es")}
-            </button>
-            <button 
-              @click="${() => this._setLanguge('en')}"
-              class="${this.language === 'en' ? 'bg-slate-900' : 'bg-slate-200 text-slate-900'} rounded-lg px-3 text-xs uppercase font-semibold py-1.5 hover:bg-slate-400 duration-300">
-                ${t("trainboard-app-main-language-en")}
-            </button>
+          <div class="flex items-center justify-center">
+            <a href="https://github.com/carlosuidev/trainboard-app" target="_blank">
+              <img src="github_icon.svg" class="w-10"/>
+            </a>
           </div>
         </div>
       </div>
