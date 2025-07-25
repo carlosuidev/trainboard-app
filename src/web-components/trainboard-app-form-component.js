@@ -136,7 +136,6 @@ export class TrainboardAppFormComponent extends LitElement {
   * @fires trainboard-app-form-component-preview
   */
   _updatePreview() {
-    console.log('ojo');
     this.dispatchEvent(new CustomEvent(`${TrainboardAppFormComponent.is}-preview`, {
         bubbles: true,
         composed: true,
