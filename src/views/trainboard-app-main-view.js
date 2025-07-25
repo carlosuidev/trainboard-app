@@ -100,9 +100,9 @@ export class TrainboardAppMainView extends LitElement {
       form: false
     };
     this.language = 'es';
-    this.stationsData = stationsData || [];
-    this.languagesData = languagesData || [];
-    this.servicesData = servicesData || [];
+    this.stationsData = stationsData;
+    this.languagesData = languagesData;
+    this.servicesData = servicesData;
     this.previewParams = {
       station: '60000',
       screen: 'departures',
