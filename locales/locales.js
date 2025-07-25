@@ -34,6 +34,8 @@ const translations = {
     "trainboard-app-form-button-submit": "Guardar configuración",
     "trainboard-app-form-button-reset": "Reiniciar configuración",
     "trainboard-app-panel-label-station": "Estación",
+    "trainboard-app-main-footer-text": "Proyecto desarrollador por Carlos Almendros, puedes ver el repositorio en el siguiente enlace:",
+    "trainboard-app-main-footer-link": "Haz click aquí :)"
   },
   en: { 
     "trainboard-app-main-header-title": "Trainboard",
