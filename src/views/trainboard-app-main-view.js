@@ -233,16 +233,7 @@ export class TrainboardAppMainView extends LitElement {
         </p>
       </div>`
   }
-
-  /**
-  * Updates locales language
-  * @param {String} lang 
-  */
-  _setLanguge(lang){
-    this.language = lang;
-    setLang(lang);
-  }
-
+  
   /**
   * Set true modal to open form
   */
