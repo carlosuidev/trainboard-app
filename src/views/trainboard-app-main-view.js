@@ -69,6 +69,14 @@ export class TrainboardAppMainView extends LitElement {
       */
       language: {
         type: String
+      },
+      /**
+      * Preview form data
+      * @type {Object}
+      * @default 'es'
+      */
+      previewParams: {
+        type: Object
       }
     };
   }
@@ -77,7 +85,7 @@ export class TrainboardAppMainView extends LitElement {
 
   constructor() {
     super();
-    this._iframeUrl = 'https://info.adif.es/?s=17000&a=a%26rutaRecursos%3D..%2F..%2F..%2Frecursos%26IdEstacion%3D17000%26languages%3DESP%26interfaz%3Dadif-gravita-departures%26traffic%3DL%2CR%2CC%2CA%26countdown%3Dtrue%26show-access%3Dtrue%26show-platform%3Dtrue%26show-product%3Dtrue%26show-number%3Dtrue%26show-platform-preview%3Dtrue%26show-header%3Dfalse%26font-size%3D1%23';
+    this._iframeUrl = 'https://info.adif.es/?s=0';
     this.iframeCustomUrl = {
       'home': this._iframeUrl,
       'preview': this._iframeUrl
@@ -95,6 +103,12 @@ export class TrainboardAppMainView extends LitElement {
     this.stationsData = stationsData || [];
     this.languagesData = languagesData || [];
     this.servicesData = servicesData || [];
+    this.previewParams = {
+      station: '',
+      screen: '',
+      language: '',
+      services: [],
+    };
   }
 
   /**
@@ -111,12 +125,18 @@ export class TrainboardAppMainView extends LitElement {
       ></trainboard-app-manager-component>`;
   }
 
+  /**
+   * Update custom rul
+   * @param {String} mode 
+   * @param {String} url 
+   */
   _updateUrl(mode, url) {
     this.iframeCustomUrl = {
       ...this.iframeCustomUrl,
       [mode]: url
     }
   }
+
   /**
   * Screen template
   * @return {TemplateResult}
@@ -141,10 +161,23 @@ export class TrainboardAppMainView extends LitElement {
         .stationsData="${this.stationsData}"
         .languagesData="${this.languagesData}"
         .servicesData="${this.servicesData}"
+        .screenParams="${this.screenParams}"
         @trainboard-app-form-component-close-modal=${this._closeModal}
         @trainboard-app-form-component-submit=${this._handleFormSubmit}
+        @trainboard-app-form-component-preview=${this._handlePreviewScreen}
       ></trainboard-app-form-component>
     `
+  }
+
+  /**
+   * Handle preview screen event
+   * @param {*} e Form data
+   */
+  _handlePreviewScreen(e) {
+    const previewInfo = e?.detail?.formData;
+    if(previewInfo?.screen && previewInfo?.station && previewInfo?.language && previewInfo?.services.length > 0) {
+      this.previewParams = e?.detail?.formData;
+    }
   }
 
   /**

@@ -19,6 +19,14 @@ export class TrainboardAppManagerComponent extends LitElement {
         type: Object
       },
       /**
+       * All the form params for search
+       * @type {Object}
+       * @default {}
+       */
+      previewParams: {
+        type: Object
+      },
+      /**
        * Screen type to manage
        * @type {String}
        * @default ''' 
@@ -35,6 +43,12 @@ export class TrainboardAppManagerComponent extends LitElement {
   constructor() {
     super();
     this.screenParams = {
+      station: '',
+      screen: '',
+      language: '',
+      services: [],
+    };
+    this.previewParams = {
       station: '',
       screen: '',
       language: '',
