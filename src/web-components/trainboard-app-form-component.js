@@ -47,9 +47,25 @@ export class TrainboardAppFormComponent extends LitElement {
        * Status of required fields
        * @type {Object}
        * @default {}
-        */
+      */
       _requiredFieldStatus: {
         type: Object
+      },
+      /**
+       * All the user params for search
+       * @type {Object}
+       * @default {}
+       */
+      screenParams: {
+        type: Object
+      },
+      /**
+       * Custom url with params to show preview
+       * @type {string}
+       * @default ''
+       */
+      customUrl: {
+        type: String
       }
     };
   }
@@ -77,6 +93,26 @@ export class TrainboardAppFormComponent extends LitElement {
       services: false,
       language: false
     };
+    this.screenParams = {
+      station: '',
+      screen: '',
+      language: '',
+      services: [],
+    };
+    this.customUrl = 'https://info.adif.es/?s=0';
+  }
+
+  updated(changedProperties) {
+    if (changedProperties.has('screenParams')) {
+      this._formData = {
+        ...this._formData,
+        ...this.screenParams
+      };
+    }
+
+    if(changedProperties.has('_formData')){
+      this._updatePreview();
+    }
   }
 
   /**
@@ -93,6 +129,21 @@ export class TrainboardAppFormComponent extends LitElement {
         }
       }));
     }
+  }
+
+  /**
+  * Dispatch event to update preview screen
+  * @fires trainboard-app-form-component-preview
+  */
+  _updatePreview() {
+    console.log('ojo');
+    this.dispatchEvent(new CustomEvent(`${TrainboardAppFormComponent.is}-preview`, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          formData: this._formData
+        }
+    }));
   }
 
   /**
@@ -130,6 +181,7 @@ export class TrainboardAppFormComponent extends LitElement {
       services: false, 
       language: false
     };
+    this.customUrl = 'https://info.adif.es/?s=0';
   }
 
   /**
@@ -181,6 +233,20 @@ export class TrainboardAppFormComponent extends LitElement {
   }
 
   /**
+  * Scren with iframe template
+  * @return {TemplateResult}
+  */
+  get _screenIframeTemplate() {
+    return html`
+      <div class="bg-slate-100 lg:flex md:flex hidden p-4 rounded-lg shadow-lg">
+        <iframe 
+          src="${this.customUrl}" 
+          class="w-full rounded-lg"></iframe>
+      </div>
+    `
+  }
+
+  /**
   * Template header
   * @return {TemplateResult}
   */
@@ -202,6 +268,16 @@ export class TrainboardAppFormComponent extends LitElement {
   }
 
   /**
+   * Parse id to station description
+   * @param {String} code 
+   * @returns {String}
+   */
+  _getStationDescription(code) {
+      const station = this.stationsData.find(st => st.code === code);
+      return station ? station.description : '';
+    }
+
+  /**
   * Template section for station selection
   * @return {TemplateResult}
   */
@@ -211,23 +287,24 @@ export class TrainboardAppFormComponent extends LitElement {
       <label>${t('trainboard-app-form-label-station')}</label>
       <small class="text-slate-500">${t("trainboard-app-form-info-label-station")}</small>
       <div class="mt-4 flex gap-0 flex-wrap w-full">
-        <input 
-          list="stations" 
-          name="station" 
-          id="station" 
-          placeholder="${t("trainboard-app-form-placeholder-station")}"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5" 
-          @change="${e => {
-            const selectedStation = this.stationsData.find(station => station.description === e.target.value);
-            this._updateForm('station', selectedStation ? selectedStation.code : '');
-          }}"
-        />
-        <datalist id="stations">
-          ${this.stationsData.map(station => html`
-              <option value=${station.description} data-code="${station.code}"></option>
-            `)
-      }
-        </datalist>
+      <input 
+        list="stations" 
+        name="station" 
+        id="station" 
+        placeholder="${t("trainboard-app-form-placeholder-station")}"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5" 
+        .value="${this._getStationDescription(this._formData.station) || ''}"
+        @change="${e => {
+        const selectedStation = this.stationsData.find(station => station.description === e.target.value);
+        this._updateForm('station', selectedStation ? selectedStation.code : '');
+        }}"
+      />
+      <datalist id="stations">
+        ${this.stationsData.map(station => html`
+          <option value="${station.description}" data-code="${station.code}"></option>
+        `)
+        }
+      </datalist>
       </div>
     </div>
     `
@@ -353,8 +430,9 @@ export class TrainboardAppFormComponent extends LitElement {
   class="fixed inset-0 bg-slate-900/50 flex justify-center items-start p-4 overflow-y-auto z-50">
   <div class="bg-white container rounded-lg p-8 mt-10 mx-auto">
     ${this._modalHeaderTemplate}
-    <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4">
+    <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10">
       ${this._formTemplate}
+      ${this._screenIframeTemplate}
     </div>
   </div>
 </div>

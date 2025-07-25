@@ -69,6 +69,14 @@ export class TrainboardAppMainView extends LitElement {
       */
       language: {
         type: String
+      },
+      /**
+      * Preview form data
+      * @type {Object}
+      * @default 'es'
+      */
+      previewParams: {
+        type: Object
       }
     };
   }
@@ -77,10 +85,10 @@ export class TrainboardAppMainView extends LitElement {
 
   constructor() {
     super();
-    this._iframeUrl = 'https://info.adif.es/?rutaRecursos=..%2F..%2F..%2Frecursos';
+    this._iframeUrl = 'https://info.adif.es/?s=0';
     this.iframeCustomUrl = {
-      home: this._iframeUrl,
-      preview: this._iframeUrl
+      'home': this._iframeUrl,
+      'preview': this._iframeUrl
     };
     this.screenParams = {
       station: '',
@@ -95,6 +103,12 @@ export class TrainboardAppMainView extends LitElement {
     this.stationsData = stationsData || [];
     this.languagesData = languagesData || [];
     this.servicesData = servicesData || [];
+    this.previewParams = {
+      station: '',
+      screen: '',
+      language: '',
+      services: [],
+    };
   }
 
   /**
@@ -106,15 +120,22 @@ export class TrainboardAppMainView extends LitElement {
       <trainboard-app-manager-component
         .screenParams="${this.screenParams}"
         .previewParams="${this.previewParams}"
-        @trainbboard-app-manager-component-url-home=${(e) => this._updateUrl('home', e.detail.url)}
-        @trainbboard-app-manager-component-url-preview=${(e) => this._updateUrl('preview', e.detail.url)}
+        @trainboard-app-manager-component-url-home=${(e) => this._updateUrl('home', e.detail)}
+        @trainboard-app-manager-component-url-preview=${(e) => this._updateUrl('preview', e.detail)}
       ></trainboard-app-manager-component>`;
   }
 
+  /**
+   * Update custom rul
+   * @param {String} mode 
+   * @param {String} url 
+   */
   _updateUrl(mode, url) {
-    this.iframeCustomUrl = url;
+    this.iframeCustomUrl = {
+      ...this.iframeCustomUrl,
+      [mode]: url
+    }
   }
-
 
   /**
   * Screen template
@@ -140,10 +161,23 @@ export class TrainboardAppMainView extends LitElement {
         .stationsData="${this.stationsData}"
         .languagesData="${this.languagesData}"
         .servicesData="${this.servicesData}"
+        .screenParams="${this.screenParams}"
         @trainboard-app-form-component-close-modal=${this._closeModal}
         @trainboard-app-form-component-submit=${this._handleFormSubmit}
+        @trainboard-app-form-component-preview=${this._handlePreviewScreen}
       ></trainboard-app-form-component>
     `
+  }
+
+  /**
+   * Handle preview screen event
+   * @param {*} e Form data
+   */
+  _handlePreviewScreen(e) {
+    const previewInfo = e?.detail?.formData;
+    if(previewInfo?.screen && previewInfo?.station && previewInfo?.language && previewInfo?.services.length > 0) {
+      this.previewParams = e?.detail?.formData;
+    }
   }
 
   /**
