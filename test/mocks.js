@@ -11172,3 +11172,10 @@ export const formUserData1 = {
     language: 'ESP',
     services: ['C','L','R','A'],
 };
+
+export const formUserData2 = {
+    station: '60000',
+    screen: 'arrivals',
+    language: 'ESP',
+    services: ['C'],
+};
