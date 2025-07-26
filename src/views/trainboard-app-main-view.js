@@ -199,19 +199,19 @@ export class TrainboardAppMainView extends LitElement {
   */
   get _headerTemplate() {
     return html`
-      <div class="bg-white px-2 py-3 flex justify-center items-center">
-        <div class="container text-white flex justify-between items-center flex-wrap">
-          <div class="flex gap-4 items-center justify-center px-2">
+      <div id="header" class="bg-white px-2 py-3 flex justify-center items-center">
+        <div class="header-container  container text-white flex justify-between items-center flex-wrap">
+          <div class="left-side  flex gap-4 items-center justify-center px-2">
             <img 
               src="trainboard_logo.svg" 
               alt="${t("trainboard-app-main-logo-white-alt")}" 
               class="lg:w-20 md:w-20 w-20 pb-2"/>
-            <div class="border-l ps-4 border-slate-900">
+            <div class="app-description border-l ps-4 border-slate-900">
               <h1 class="font-bold text-xl text-slate-900">${t("trainboard-app-main-header-title")}</h1>
               <h2 class="text-xs uppercase font-semibold text-slate-900">${t("trainboard-app-main-header-subtitle")}</h2>
             </div>
           </div>
-          <div class="flex items-center justify-center">
+          <div class="right-side  flex items-center justify-center">
             <a href="https://github.com/carlosuidev/trainboard-app" target="_blank">
               <img src="github_icon.svg" class="w-10"/>
             </a>
@@ -227,13 +227,13 @@ export class TrainboardAppMainView extends LitElement {
   */
   get _disclaimerTemplate(){
     return html`
-      <div class="bg-yellow-100 text-yellow-600 rounded-lg w-full px-6 py-3 mb-4">
+      <div id="disclaimer" class="bg-yellow-100 text-yellow-600 rounded-lg w-full px-6 py-3 mb-4">
         <p class="text-sm text-center text-balance">
           <span class="font-bold">${t("trainboard-app-main-disclaimer-label")}</span>${t("trainboard-app-main-disclaimer-text")}
         </p>
       </div>`
   }
-  
+
   /**
   * Set true modal to open form
   */
@@ -260,9 +260,9 @@ export class TrainboardAppMainView extends LitElement {
   */
   get _bodyTemplate() {
     return html`
-      <div class="px-2 py-4 flex justify-center items-center">
+      <div id="body-content" class="px-2 py-4 flex justify-center items-center">
         <div class="container">
-          <div>
+          <div class="main-section">
             ${this._disclaimerTemplate}
             ${this._iframePanelTemplate}
           </div>
@@ -277,8 +277,8 @@ export class TrainboardAppMainView extends LitElement {
   */
   get _footerTemplate(){
     return html`
-      <footer class="px-2 py-8 flex justify-center items-center">
-        <div class="footer text-sm text-slate-400 text-center">
+      <footer id="footer" class="px-2 py-8 flex justify-center items-center">
+        <div class="footer-section  text-sm text-slate-400 text-center">
           <p>${t("trainboard-app-main-footer-text")}<p>
           <a href="https://github.com/carlosuidev/trainboard-app" target="_blank" class="font-semibold underline">${t("trainboard-app-main-footer-link")}</a>
         </div>
@@ -293,7 +293,7 @@ export class TrainboardAppMainView extends LitElement {
   get _mainStructureTemplate() {
     return html`
       ${this.trainboardManagerTemplate}
-      <div class="bg-slate-100 min-h-screen text-slate-900">
+      <div class="main-view-container  bg-slate-100 min-h-screen text-slate-900">
         ${this._headerTemplate}
         ${this._bodyTemplate}
         ${this.toggles?.form === true 
