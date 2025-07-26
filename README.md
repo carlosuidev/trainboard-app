@@ -1,5 +1,7 @@
 # 🚆 TRAINBOARD
 
+![Preview](./public/readme/readme_screen.png)
+
 Una aplicación creada con web-components para consultar **pantallas de horarios ferroviarios** en España.  
 Desarrollada con [Lit Element](https://lit.dev/), [Tailwind CSS](https://tailwindcss.com/) y [Vite](https://vitejs.dev/) para ofrecer velocidad, claridad y un diseño adaptado a pantallas de visualización en el sistema ferroviario de Españá.
 
@@ -34,7 +36,7 @@ cd trainboard-app
 npm install
 
 # 3. Inicia el servidor de desarrollo
-npm run start
+npm run dev
 ```
 
 ## 🧪 Testing
