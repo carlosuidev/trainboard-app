@@ -1,7 +1,7 @@
 import { LitElement, css, html, nothing } from 'lit'
 import { TWStyles } from '../../tw.js'
 import { languagesData, stationsData, servicesData } from '../data/constants.js';
-import { setLang, t } from '../../locales/locales.js';
+import { t } from '../../locales/locales.js';
 import { TrainboardAppPanelComponent } from '../web-components/trainboard-app-panel-component.js';
 import { TrainboardAppFormComponent } from '../web-components/trainboard-app-form-component.js';
 import { TrainboardAppManagerComponent } from '../web-components/trainboard-app-manager-component.js';
