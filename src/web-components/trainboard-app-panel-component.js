@@ -91,7 +91,7 @@ export class TrainboardAppPanelComponent extends LitElement {
   */
   get _screenIframeTemplate() {
     return html`
-      <div class="container mx-auto bg-white lg:p-8 md:p-8 p-4 rounded-lg">
+      <div class="screen-container  container mx-auto bg-white lg:p-8 md:p-8 p-4 rounded-lg">
         ${this._screenHeaderTemplate}
         <iframe 
           src="${this.customUrl}" 
@@ -107,9 +107,9 @@ export class TrainboardAppPanelComponent extends LitElement {
   */
   get _externalLinkTemplate(){
     return html`
-    <div class="pt-2 text-xs flex flex-col items-center gap-2">
-      <div class="border rounded-lg bg-slate-100 p-2 lg:flex md:hidden hidden">
-      ${this._parseCustomUrl(this.customUrl)}
+    <div class="external-container  pt-2 text-xs flex flex-col items-center gap-2">
+      <div class="copy-box  border rounded-lg bg-slate-100 p-2 lg:flex md:hidden hidden">
+       <p>${this._parseCustomUrl(this.customUrl)}</p>
       </div>
       <a
       href="${this._parseCustomUrl(this.customUrl)}"
@@ -149,24 +149,24 @@ export class TrainboardAppPanelComponent extends LitElement {
     } else if (this.screenParams?.screen === 'arrivals') {
       screen = t('trainboard-app-form-value-screen-arrivals');
     }
-    const services = this._parseServiceCodes(this.screenParams?.services) || '-';
+    const services = this._parseServiceCodes(this.screenParams?.services);
     const language = this._parseLanguageCode(this.screenParams?.language) || '-';
     return html`
-      <div class="mb-8 flex justify-between items-center grid lg:grid-cols-5 md:grid-cols-3 grid-cols-3 gap-4">
-        <div class="px-3 py-3 bg-emerald-100 rounded lg:col-span-1 md:col-span-4 col-span-4">
+      <div id="screen-header" class="mb-8 flex justify-between items-center grid lg:grid-cols-5 md:grid-cols-3 grid-cols-3 gap-4">
+        <div class="label  screen-content  px-3 py-3 bg-emerald-100 rounded lg:col-span-1 md:col-span-4 col-span-4">
           <p class="text-2xl font-bold italic text-center text-emerald-500">${screen}</p>
         </div>
-        <div class="text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
-          <p class="font-bold">${t("trainboard-app-panel-label-station")}</p>
-          <p>${station}</p>
+        <div class="station-content  text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
+          <p class="label  font-bold">${t("trainboard-app-panel-label-station")}</p>
+          <p class="description">${station}</p>
         </div>
-        <div class="text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
-          <p class="font-bold">${t("trainboard-app-panel-label-services")}</p>
-          <p>${services}</p>
+        <div class="services-content  text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
+          <p class="label  font-bold">${t("trainboard-app-panel-label-services")}</p>
+          <p class="description">${services}</p>
         </div>
-        <div class="text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
-          <p class="font-bold">${t("trainboard-app-panel-label-language")}</p>
-          <p>${language}</p>
+        <div class="language-content  text-sm self-start lg:col-span-1 md:col-span-1 col-span-1">
+          <p class="label  font-bold">${t("trainboard-app-panel-label-language")}</p>
+          <p class="description">${language}</p>
         </div>
         <button
           @click="${this._fireOpenModal}"

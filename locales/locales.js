@@ -44,7 +44,3 @@ let currentLang = 'es';
 export function t(key) {
   return translations[currentLang][key] || key;
 }
-
-export function setLang(lang) {
-  currentLang = lang;
-}

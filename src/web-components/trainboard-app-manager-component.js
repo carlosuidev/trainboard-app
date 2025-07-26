@@ -92,7 +92,7 @@ export class TrainboardAppManagerComponent extends LitElement {
    * @returns {String}
    */
   _getServices(services){
-    if(services.length === 0){
+    if(services.length === 1){
       return `3D${services[0]}`;
     }
     return services.map((item, idx) => (idx === 0 ? `3D${item}` : `2C${item}`)).join('%');
