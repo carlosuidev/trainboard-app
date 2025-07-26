@@ -1,6 +1,6 @@
 # 🚆 TRAINBOARD
 
-![Preview](./public/readme/readme_screen.png)
+![Preview](./public/readme_screen.png)
 
 Una aplicación creada con web-components para consultar **pantallas de horarios ferroviarios** en España.  
 Desarrollada con [Lit Element](https://lit.dev/), [Tailwind CSS](https://tailwindcss.com/) y [Vite](https://vitejs.dev/) para ofrecer velocidad, claridad y un diseño adaptado a pantallas de visualización en el sistema ferroviario de Españá.
