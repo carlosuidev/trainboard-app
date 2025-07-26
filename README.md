@@ -5,7 +5,7 @@
 Una aplicación creada con web-components para consultar **pantallas de horarios ferroviarios** en España.  
 Desarrollada con [Lit Element](https://lit.dev/), [Tailwind CSS](https://tailwindcss.com/) y [Vite](https://vitejs.dev/) para ofrecer velocidad, claridad y un diseño adaptado a pantallas de visualización en el sistema ferroviario de Españá.
 
-<p style="text-align: center">
+<p>
   <img src="./public/lit_logo.svg" width="96" />
   <img src="./public/tailwind_logo.png" width="96" />
   <img src="./public/vite_logo.png" width="96" />
