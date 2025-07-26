@@ -11165,3 +11165,10 @@ export const servicesData = [
 		name: 'trainboard-app-form-services-options-high-speed'
 	}
 ];
+
+export const formUserData1 = {
+    station: '60000',
+    screen: 'departures',
+    language: 'ESP',
+    services: ['C','L','R','A'],
+};
