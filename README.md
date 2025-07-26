@@ -1,4 +1,4 @@
-# 🚆 TRAINBOARD
+<img src="./public/trainboard_logo_white.png" width="64" /> # Trainboard
 
 ![Preview](./public/readme_screen.png)
 
@@ -60,7 +60,7 @@ npm run test
 Esta herramienta es independiente y no tiene ninguna relación oficial con Adif. Su único propósito es facilitar a los usuarios la consulta de la información mostrada en los paneles de las estaciones gestionadas por Adif.
 
 **🔝 AGRADECIMIENTOS 🔝**
-[@hugo_cnm](https://x.com/hugo_cnm) por conseguir el QR con la información de las pantallas
-[@mnever97](https://x.com/mnever97), [@rubenbupe ](https://x.com/rubenbupe ) y [@mariomnts](https://x.com/@mariomnts) por ser los pioneros de esta idea
+- [@hugo_cnm](https://x.com/hugo_cnm) por conseguir el QR con la información de las pantallas
+- [@mnever97](https://x.com/mnever97), [@rubenbupe ](https://x.com/rubenbupe ) y [@mariomnts](https://x.com/@mariomnts) por ser los pioneros de esta idea
 
 
