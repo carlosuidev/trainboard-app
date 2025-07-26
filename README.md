@@ -1,7 +1,4 @@
-<div style="display: flex; align-items: center; gap: 0.5rem;">
-  <img src="./public/trainboard_logo_white.svg" width="64" alt="Trainboard logo" />
-  <h1>Trainboard</h1>
-</div>
+# 🚆 Trainboard
 
 ![Preview](./public/readme_screen.png)
 
