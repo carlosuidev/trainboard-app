@@ -725,6 +725,10 @@ video {
   top: 0px;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
 .top-2 {
   top: 0.5rem;
 }
@@ -997,6 +1001,10 @@ video {
 
 .flow-root {
   display: flow-root;
+}
+
+.\\!grid {
+  display: grid !important;
 }
 
 .grid {
@@ -2809,11 +2817,6 @@ video {
   padding-bottom: 0.25rem;
 }
 
-.py-1\\.5 {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
-}
-
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -3675,11 +3678,6 @@ video {
 .hover\\:bg-slate-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));
-}
-
-.hover\\:bg-slate-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity, 1));
 }
 
 .hover\\:font-bold:hover {
