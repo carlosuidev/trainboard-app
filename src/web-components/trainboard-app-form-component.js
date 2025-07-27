@@ -225,7 +225,7 @@ export class TrainboardAppFormComponent extends LitElement {
    */
   get _errorMessageLabel() {
     return html`
-      <p class="text-red-500 text-xs mt-1.5">
+      <p class="error-message  text-red-500 text-xs mt-1.5">
         ${t("trainboard-app-form-error-required-message")}
       </p>
     `;
@@ -237,7 +237,7 @@ export class TrainboardAppFormComponent extends LitElement {
   */
   get _screenIframeTemplate() {
     return html`
-      <div class="bg-slate-100 lg:flex md:flex hidden p-4 rounded-lg shadow-lg">
+      <div class="screen-preview-container  bg-slate-100 lg:flex md:flex hidden p-4 rounded-lg shadow-lg">
         <iframe 
           src="${this.customUrl}" 
           class="w-full rounded-lg"></iframe>
@@ -251,12 +251,13 @@ export class TrainboardAppFormComponent extends LitElement {
   */
   get _modalHeaderTemplate() {
     return html`
-    <div class="flex justify-between items-start gap-4 mb-8">
-      <div>
+    <div class="form-header  flex justify-between items-start gap-4 mb-8">
+      <div class="form-title">
         <h2 class="text-2xl font-bold mb-2  ">${t("trainboard-app-form-title")}</h2>
         <p>${t("trainboard-app-form-subtitle")}</p>
       </div>
       <button
+        id="close-modal-btn" 
         class="bg-slate-100 hover:bg-slate-200 duration-300 p-2 w-10 h-10 rounded-full"
         @click="${this._closeModal}"
       >
@@ -282,7 +283,7 @@ export class TrainboardAppFormComponent extends LitElement {
   */
   get _stationSectionTemplate() {
     return html`
-    <div class="flex flex-col gap-1">
+    <div class="station-section  flex flex-col gap-1">
       <label>${t('trainboard-app-form-label-station')}</label>
       <small class="text-slate-500">${t("trainboard-app-form-info-label-station")}</small>
       <div class="mt-4 flex gap-0 flex-wrap w-full">
@@ -315,7 +316,7 @@ export class TrainboardAppFormComponent extends LitElement {
    */
   get _screenTypeSectionTemplate() {
     return html`
-    <div class="flex flex-col gap-1">
+    <div class="screen-section  flex flex-col gap-1">
       <label>${t('trainboard-app-form-label-screen')}</label>
       <small class="text-slate-500">${t("trainboard-app-form-info-label-screen")}</small>
       <div class="mt-4 flex gap-0 flex-wrap">
@@ -335,7 +336,7 @@ export class TrainboardAppFormComponent extends LitElement {
   */
   get _servicesSectionTemplate() {
     return html`
-    <div class="flex flex-col gap-1">
+    <div class="services-section  flex flex-col gap-1">
       <label>${t('trainboard-app-form-label-services')}</label>
       <small class="text-slate-500">${t("trainboard-app-form-info-label-services")}</small>
       <div class="mt-4 flex gap-1 flex-wrap w-full">
@@ -355,7 +356,7 @@ export class TrainboardAppFormComponent extends LitElement {
   */
   get _languageSectionTemplate() {
     return html`
-    <div class="flex flex-col gap-1">
+    <div class="language-section  flex flex-col gap-1">
       <label>${t('trainboard-app-form-label-language')}</label>
       <small class="text-slate-500">${t("trainboard-app-form-info-label-language")}</small>
       <div class="mt-4 flex gap-0 flex-wrap w-full">
@@ -404,11 +405,13 @@ export class TrainboardAppFormComponent extends LitElement {
     <hr class="my-8"/>
     <div class="flex lg:flex-row md:flex-row flex-col gap-2">
     <button 
+      id="btn-submit"
       @click="${() => this._submitForm()}" 
       type="button" class="font-semibold bg-emerald-400 text-center text-white rounded-lg px-6 py-3 cursor-pointer hover:bg-emerald-500 duration-300 text-sm">
       ${t("trainboard-app-form-button-submit")}
     </button>
     <button 
+      id="btn-reset"
       @click="${() => this._resetForm()}" 
       type="button" class="font-medium text-center text-red-500 rounded-lg px-6 py-3 cursor-pointer hover:underline duration-300 text-sm">
       ${t("trainboard-app-form-button-reset")}
@@ -425,17 +428,17 @@ export class TrainboardAppFormComponent extends LitElement {
   get _trainboardFormComponent() {
     return html`
     <div
-  @close=${this._close}
-  class="fixed inset-0 bg-slate-900/50 flex justify-center items-start p-4 overflow-y-auto z-50">
-  <div class="bg-white container rounded-lg p-8 mt-10 mx-auto">
-    ${this._modalHeaderTemplate}
-    <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10">
-      ${this._formTemplate}
-      ${this._screenIframeTemplate}
+    id="form-modal" 
+    class="fixed inset-0 bg-slate-900/50 flex justify-center items-start p-4 overflow-y-auto z-50">
+      <div class="form-container  bg-white container rounded-lg p-8 mt-10 mx-auto">
+        ${this._modalHeaderTemplate}
+        <div class="form-body  grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10">
+          ${this._formTemplate}
+          ${this._screenIframeTemplate}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-`
+    `
   }
 
   render() {
